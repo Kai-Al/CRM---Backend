@@ -1,6 +1,6 @@
-import Order, { find, findById, findOneAndUpdate, findByIdAndDelete } from "../models/order.model.js";
+const Order = require("../models/order.model.js");
 
-export async function newOrder(req, res, next) {
+exports.newOrder = async (req, res, next) => {
     const order = new Order(req.body);
     try {
         await order.save();
@@ -11,9 +11,9 @@ export async function newOrder(req, res, next) {
     }
 }
 
-export async function getAllOrders(req, res, next) {
+exports.getAllOrders = async (req, res, next) => {
     try {
-        const orders = await find({}).populate('User').populate({
+        const orders = await Order.find({}).populate('User').populate({
             path: 'order.product',
             model: 'Products'
         });
@@ -24,9 +24,9 @@ export async function getAllOrders(req, res, next) {
     }
 }
 
-export async function getOrder(req, res) {
+exports.getOrder = async (req, res) => {
     try {
-        const order = await findById(req.params.id).populate('user').populate({
+        const order = await Order.findById(req.params.id).populate('user').populate({
             path: 'order.product',
             model: 'Products'
         });
@@ -36,9 +36,9 @@ export async function getOrder(req, res) {
     }
 }
 
-export async function updateOrder(req, res) {
+exports.updateOrder = async (req, res) => {
     try {
-        const order = await findOneAndUpdate({_id: req.params.id}, req.body, {
+        const order = await Order.findOneAndUpdate({_id: req.params.id}, req.body, {
             new: true
         }).populate('User').populate({
             path: 'order.product',
@@ -50,9 +50,9 @@ export async function updateOrder(req, res) {
     }
 }
 
-export async function deleteOrder(req, res) {
+exports.deleteOrder = async (req, res) => {
     try {
-        const order = await findByIdAndDelete({_id: req.params.id});
+        const order = await Order.findByIdAndDelete({_id: req.params.id});
         res.json(order);
     } catch (error) {
         console.log(error);

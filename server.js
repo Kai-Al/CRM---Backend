@@ -31,6 +31,8 @@ app.use(express.json());
 
 app.use("/api/auth", require("./routes/auth.routes"));
 app.use("/api/user", require("./routes/user.routes"));
+app.use("/api/product", require("./routes/product.routes"));
+app.use("/api/order", require("./routes/order.routes"));
 
 app.use(express.urlencoded({ extended: true }));
 

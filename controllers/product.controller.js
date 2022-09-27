@@ -1,6 +1,6 @@
-import Product, { find, findById, findOneAndUpdate, findByIdAndDelete } from "../models/product.model.js";
+const Product = require("../models/product.model.js");
 
-export async function newProduct(req, res, next) {
+exports.newProduct = async (req, res, next) => {
   const product = new Product(req.body);
 
   try {
@@ -10,21 +10,21 @@ export async function newProduct(req, res, next) {
     console.log(error);
     next();
   }
-}
+};
 
-export async function getAllProducts(req, res, next) {
+exports.getAllProducts = async (req, res, next) => {
   try {
-    const products = await find({});
+    const products = await Product.find({});
     res.json(products);
   } catch (error) {
     console.log(error);
     next();
   }
-}
+};
 
-export async function getProduct(req, res, next) {
+exports.getProduct = async (req, res, next) => {
   try {
-    const product = await findById(req.params.id);
+    const product = await Product.findById(req.params.id);
     if (!product) {
       res.json("This product does not exist");
       next();
@@ -35,11 +35,11 @@ export async function getProduct(req, res, next) {
     console.log(error);
     next();
   }
-}
+};
 
-export async function updateProduct(req, res, next) {
+exports.updateProduct = async (req, res, next) => {
   try {
-    const product = await findOneAndUpdate(
+    const product = await Product.findOneAndUpdate(
       { _id: req.params.id },
       req.body,
       {
@@ -51,14 +51,14 @@ export async function updateProduct(req, res, next) {
     console.log(error);
     next();
   }
-}
+};
 
-export async function deleteProduct(req, res, next) {
+exports.deleteProduct = async (req, res, next) => {
   try {
-    const product = await findByIdAndDelete({ _id: req.params.id });
+    const product = await Product.findByIdAndDelete({ _id: req.params.id });
     res.json(product);
   } catch (error) {
     console.log(error);
     next();
   }
-}
+};
