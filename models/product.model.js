@@ -18,6 +18,11 @@ const Product = mongoose.model(
         required: true,
         trim: true,
     },
+    quantity: {
+        type: Number,
+        required: true,
+        trim: true,
+    },
   })
 );
 
