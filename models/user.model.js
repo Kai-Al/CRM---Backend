@@ -7,19 +7,19 @@ const User = mongoose.model(
       type: String,
       required: true,
       trim: true,
-      minlength: 3
+      minlength: 3,
     },
     email: {
       type: String,
       required: true,
       trim: true,
-      minlength: 5
+      minlength: 5,
     },
     password: {
       type: String,
       required: true,
       trim: true,
-      minlength: 6
+      minlength: 6,
     },
     roles: [
       {

@@ -1,5 +1,10 @@
 const express = require("express");
 const cors = require("cors");
+const authRoute = require("./routes/auth.routes");
+const userRoute = require("./routes/user.routes");
+const productRoute = require("./routes/product.routes");
+const orderRoute = require("./routes/order.routes");
+
 require("dotenv").config();
 
 const app = express();
@@ -27,12 +32,21 @@ var corsOptions = {
 
 app.use(cors(corsOptions));
 
+app.use(function (req, res, next) {
+  res.header(
+    "Access-Control-Allow-Headers",
+    "x-access-token, Origin, Content-Type, Accept"
+  );
+  next();
+});
+
 app.use(express.json());
 
-app.use("/api/auth", require("./routes/auth.routes"));
-app.use("/api/user", require("./routes/user.routes"));
-app.use("/api/product", require("./routes/product.routes"));
-app.use("/api/order", require("./routes/order.routes"));
+
+authRoute(app);
+userRoute(app);
+productRoute(app);
+orderRoute(app);
 
 app.use(express.urlencoded({ extended: true }));
 

@@ -1,33 +1,26 @@
 const { authJwt } = require("../middlewares");
 const controller = require("../controllers/product.controller");
 
-module.exports = function (app) {
-  app.use(function (req, res, next) {
-    res.header(
-      "Access-Control-Allow-Headers",
-      "x-access-token, Origin, Content-Type, Accept"
-    );
-    next();
-  });
 
+module.exports = function (app) {
   app.post(
-    "/new",
+    "/api/product/new",
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.newProduct
   );
 
-  app.get("/all", controller.getAllProducts);
+  app.get("/api/product/all", controller.getAllProducts);
 
-  app.get("/:id", controller.getProduct);
+  app.get("/api/product/:id", controller.getProduct);
 
   app.put(
-    "/:id",
+    "/api/product/:id",
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.updateProduct
   );
 
   app.delete(
-    "/:id",
+    "/api/product/:id",
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.deleteProduct
   );

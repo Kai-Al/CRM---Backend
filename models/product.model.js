@@ -4,24 +4,24 @@ const Product = mongoose.model(
   "Product",
   new mongoose.Schema({
     name: {
-        type: String,
-        required: true,
-        trim: true,
+      type: String,
+      required: true,
+      trim: true,
     },
     price: {
-        type: Number,
-        required: true,
-        trim: true,
+      type: Number,
+      required: true,
+      trim: true,
     },
     description: {
-        type: String,
-        required: true,
-        trim: true,
+      type: String,
+      required: true,
+      trim: true,
     },
     quantity: {
-        type: Number,
-        required: true,
-        trim: true,
+      type: Number,
+      required: true,
+      trim: true,
     },
   })
 );
