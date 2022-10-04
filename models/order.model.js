@@ -12,12 +12,7 @@ const Order = mongoose.model(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-    },
-    total: {
-      type: Number,
-      required: true,
-      trim: true,
-    },
+    }
   })
 );
 
